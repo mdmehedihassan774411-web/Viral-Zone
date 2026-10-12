@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Viral Zone</title>
+
+  <!-- Ad SDK Integration -->
+  <script src='//libtl.com/sdk.js' data-zone='12004088' data-sdk='show_12004088'></script>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    body { font-family: 'Inter', sans-serif; background-color: #121212; color: #ffffff; }
+    .card-bg { background-color: #1e1e1e; }
+    .text-accent { color: #ff8c00; }
+    .btn-accent { background-color: #ff8c00; color: #121212; font-weight: bold; }
+    .btn-accent:hover { background-color: #e67e00; }
+    .btn-accent:active { transform: scale(0.95); }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    .animate-fadeIn { animation: fadeIn 0.3s ease-in-out; }
+  </style>
+</head>
+
+<body class="max-w-md mx-auto min-h-screen flex flex-col justify-between p-4">
+
+  <!-- Header -->
+  <header class="flex items-center justify-between pb-4 border-b border-gray-800">
+    <div class="flex items-center space-x-2">
+      <i data-lucide="play-circle" class="w-8 h-8 text-accent"></i>
+      <h1 class="text-2xl font-bold text-accent">Viral Zone</h1>
+    </div>
+    <span class="text-xs bg-gray-800 text-gray-400 px-3 py-1 rounded-full border border-gray-700">Watch & Enjoy</span>
+  </header>
+
+  <!-- Video Section -->
+  <main class="flex-grow py-6 space-y-6">
+    <div class="text-center">
+      <h2 class="text-xl font-bold">আজকের ট্রেন্ডিং ভিডিওসমূহ</h2>
+      <p class="text-xs text-gray-400 mt-1">ভিডিও প্লে করতে "Play Video" বাটনে ক্লিক করুন</p>
+    </div>
+
+    <!-- Video Item 1 -->
+    <div class="card-bg p-4 rounded-xl border border-gray-800 shadow-lg space-y-3">
+      <!-- Video Thumbnail/Picture -->
+      <div class="relative rounded-lg overflow-hidden bg-gray-900 aspect-video flex items-center justify-center border border-gray-800">
+        <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=600&auto=format&fit=crop" alt="Thumbnail 1" class="w-full h-full object-cover">
+        <div class="absolute inset-0 bg-black/40 flex items-center justify-center">
+          <i data-lucide="play-circle" class="w-12 h-12 text-accent opacity-90 drop-shadow-lg"></i>
+        </div>
+      </div>
+      <div>
+        <h3 class="font-bold text-lg text-white">Viral Short Video #01</h3>
+        <p class="text-xs text-gray-400">ভিডিওটি দেখতে এড সম্পন্ন করুন</p>
+      </div>
+      <button onclick="playVideoWithAds('Viral Short Video #01', 'https://www.w3schools.com/html/mov_bbb.mp4')" class="w-full py-3 rounded-lg btn-accent flex items-center justify-center space-x-2">
+        <i data-lucide="play" class="w-5 h-5 fill-current"></i>
+        <span>Play Video</span>
+      </button>
+    </div>
+
+    <!-- Video Item 2 -->
+    <div class="card-bg p-4 rounded-xl border border-gray-800 shadow-lg space-y-3">
+      <!-- Video Thumbnail/Picture -->
+      <div class="relative rounded-lg overflow-hidden bg-gray-900 aspect-video flex items-center justify-center border border-gray-800">
+        <img src="https://images.unsplash.com/photo-1579546929518-9e396f3cc809?q=80&w=600&auto=format&fit=crop" alt="Thumbnail 2" class="w-full h-full object-cover">
+        <div class="absolute inset-0 bg-black/40 flex items-center justify-center">
+          <i data-lucide="play-circle" class="w-12 h-12 text-accent opacity-90 drop-shadow-lg"></i>
+        </div>
+      </div>
+      <div>
+        <h3 class="font-bold text-lg text-white">Trending Movie Clip #02</h3>
+        <p class="text-xs text-gray-400">ভিডিওটির থাম্বনেইল ও এড দেখুন</p>
+      </div>
+      <button onclick="playVideoWithAds('Trending Movie Clip #02', 'https://www.w3schools.com/html/mov_bbb.mp4')" class="w-full py-3 rounded-lg btn-accent flex items-center justify-center space-x-2">
+        <i data-lucide="play" class="w-5 h-5 fill-current"></i>
+        <span>Play Video</span>
+      </button>
+    </div>
+  </main>
+
+  <!-- Footer Notice -->
+  <footer class="text-center text-xs text-gray-500 py-4 border-t border-gray-800">
+    &copy; Viral Zone - All rights reserved
+  </footer>
+
+  <!-- Ad Countdown Overlay / Modal -->
+  <div id="ad-modal" class="hidden fixed inset-0 bg-black/95 flex flex-col items-center justify-center z-50 p-6 animate-fadeIn">
+    <div class="bg-gray-900 border border-gray-800 rounded-2xl p-6 w-full max-w-sm text-center space-y-4 shadow-2xl">
+      <div class="animate-bounce">
+        <i data-lucide="tv" class="w-12 h-12 text-accent mx-auto"></i>
+      </div>
+      <h3 id="ad-status-title" class="text-lg font-bold text-white">অ্যাড দেখানো হচ্ছে...</h3>
+      
+      <!-- Countdown Circular Box -->
+      <div class="w-20 h-20 rounded-full border-4 border-accent flex items-center justify-center mx-auto my-2">
+        <span id="ad-countdown" class="text-3xl font-bold text-accent">5</span>
+      </div>
+
+      <p id="ad-status-desc" class="text-xs text-gray-400">ভিডিওটি আনলক করতে অ্যাডগুলো সম্পূর্ণ হতে দিন। ব্রাউজার বন্ধ করবেন না।</p>
+    </div>
+  </div>
+
+  <!-- Video Player Modal -->
+  <div id="player-modal" class="hidden fixed inset-0 bg-black z-[100] flex flex-col justify-between p-4 animate-fadeIn">
+    <div class="flex items-center justify-between pb-2 border-b border-gray-800">
+      <h3 id="playing-video-title" class="font-bold text-accent truncate">Playing Video</h3>
+      <button onclick="closePlayer()" class="bg-gray-800 text-white p-2 rounded-full hover:bg-red-600">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+    </div>
+
+    <!-- HTML5 Video Player -->
+    <div class="flex-grow flex items-center justify-center my-auto">
+      <video id="main-video-player" controls class="w-full rounded-lg max-h-[75vh] bg-black">
+        <source id="video-source" src="" type="video/mp4">
+        Your browser does not support video playback.
+      </video>
+    </div>
+
+    <div class="text-center py-2">
+      <button onclick="closePlayer()" class="w-full py-3 bg-red-600 font-bold rounded-lg text-white">
+        Close Video
+      </button>
+    </div>
+  </div>
+
+  <script>
+    lucide.createIcons();
+
+    const adModal = document.getElementById('ad-modal');
+    const adCountdown = document.getElementById('ad-countdown');
+    const adStatusTitle = document.getElementById('ad-status-title');
+    const adStatusDesc = document.getElementById('ad-status-desc');
+    
+    const playerModal = document.getElementById('player-modal');
+    const videoPlayer = document.getElementById('main-video-player');
+    const videoSource = document.getElementById('video-source');
+    const playingVideoTitle = document.getElementById('playing-video-title');
+
+    // Ads logic before playing video
+    async function playVideoWithAds(title, videoUrl) {
+      adModal.classList.remove('hidden');
+      
+      // Step 1: Trigger 1st Ad
+      adStatusTitle.textContent = "১ম এড প্লে হচ্ছে...";
+      adStatusDesc.textContent = "অনুগ্রহ করে এডটি দেখুন...";
+      showSdkAd();
+      await startCountdown(5);
+
+      // Step 2: Trigger 2nd Ad
+      adStatusTitle.textContent = "২য় এড প্লে হচ্ছে...";
+      adStatusDesc.textContent = "ভিডিওটি লোড হচ্ছে, শেষ এডটি সম্পন্ন করুন...";
+      showSdkAd();
+      await startCountdown(5);
+
+      // Step 3: Open Video Player
+      adModal.classList.add('hidden');
+      openVideoPlayer(title, videoUrl);
+    }
+
+    // Call Updated SDK Ad function safely
+    function showSdkAd() {
+      if (typeof window.show_12004088 === 'function') {
+        try {
+          window.show_12004088();
+        } catch (e) {
+          console.log("Ad Load Error");
+        }
+      }
+    }
+
+    // Countdown Timer Helper
+    function startCountdown(seconds) {
+      return new Promise((resolve) => {
+        let timeLeft = seconds;
+        adCountdown.textContent = timeLeft;
+        const timer = setInterval(() => {
+          timeLeft--;
+          adCountdown.textContent = timeLeft;
+          if (timeLeft <= 0) {
+            clearInterval(timer);
+            resolve();
+          }
+        }, 1000);
+      });
+    }
+
+    // Open Main Video Player
+    function openVideoPlayer(title, videoUrl) {
+      playingVideoTitle.textContent = title;
+      videoSource.src = videoUrl;
+      videoPlayer.load();
+      playerModal.classList.remove('hidden');
+      videoPlayer.play();
+    }
+
+    // Close Player & Stop Video
+    function closePlayer() {
+      videoPlayer.pause();
+      videoPlayer.currentTime = 0;
+      playerModal.classList.add('hidden');
+    }
+  </script>
+</body>
+</html>
